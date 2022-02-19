@@ -1,0 +1,39 @@
+server {
+        server_name bryn1u.proton.edu.pl www.bryn1u.proton.edu.pl;
+        charset off;
+        index index.php index.html;
+        access_log /home/bryn1u/logs/bryn1u.access.log;
+        error_log /home/bryn1u/logs/bryn1u.error.log notice;
+        ssi on;
+        set $root_path /home/bryn1u/public_html/bryn1u.proton.edu.pl;
+        root $root_path;
+        listen 79.137.56.144:80;
+	autoindex on;
+
+	
+     	location ~* ^.+\.(jpeg|jpg|png|gif|bmp|ico|svg|css|js)$ {
+            expires     max;
+        }
+
+
+     	location ~ [^/]\.php(/|$) {
+            
+	    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            if (!-f $document_root$fastcgi_script_name) {
+                return  404;
+            }
+	     
+            fastcgi_pass    127.0.0.1:9001;
+            fastcgi_index   index.php;
+            include         /etc/nginx/fastcgi_params;
+	    try_files $uri =404;
+
+        }
+
+    }
+    
+
+
+
+
+

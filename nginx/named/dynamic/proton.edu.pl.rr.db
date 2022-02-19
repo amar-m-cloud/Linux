@@ -1,0 +1,14 @@
+$ORIGIN 56.137.79.in-addr.arpa.
+$TTL 86400
+@    IN    SOA   dns1.proton.edu.pl. admin.proton.edu.pl. (
+            2017052900;
+            21600;
+            3600;
+            604800;
+            86400    );
+@    IN    NS	dns1.proton.edu.pl.
+@    IN    NS   	dns2.proton.edu.pl.
+144   IN    PTR    dns1.proton.edu.pl.
+144    IN    PTR    dns2.proton.edu.pl.
+
+;79.137.56.144

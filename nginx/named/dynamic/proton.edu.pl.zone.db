@@ -1,0 +1,40 @@
+$TTL 1H
+$ORIGIN proton.edu.pl.
+@     IN SOA    proton.edu.pl admin.proton.edu.pl. (
+                    2017052900    ; serial
+                    1D    ; refresh
+                    1H    ; retry
+                    1W    ; expire
+                    3H )    ; minimum
+
+	IN	NS	dns1.proton.edu.pl.
+        IN	NS	dns2.proton.edu.pl.
+	
+1w	IN	MX	10	mail.proton.edu.pl.	
+;	IN	MX	20	mail
+
+;	IN	NS 	desi.ns.cloudflare.com.
+;	IN	NS	hank.ns.cloudflare.com.
+
+
+@	IN	A	79.137.56.144
+dns1	IN	A	79.137.56.144
+dns2	IN	A	79.137.56.144
+
+www     IN	CNAME	dns1.proton.edu.pl.
+ftp     IN	CNAME	dns2.proton.edu.pl.
+bryn1u 	IN	A	79.137.56.144
+rockcat	IN	A	79.137.56.144
+aix	IN	A	79.137.56.144
+zenek	IN	A	79.137.56.144
+kresk	IN	A	79.137.56.144
+mysql	IN	A	79.137.56.144
+php	IN	A	79.137.56.144
+cloud	IN	A	79.137.56.144
+xyu	IN	A	79.137.56.144
+bobstein	IN	A	79.137.56.144
+kobolt IN	A	79.137.56.144
+dj	IN	A	79.137.56.144
+etl	IN	A	79.137.56.144
+
+;79.137.56.144

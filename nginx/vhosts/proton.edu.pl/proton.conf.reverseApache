@@ -1,0 +1,41 @@
+server {
+    listen      79.137.56.144:80;
+    server_name proton.edu.pl www.proton.edu.pl;
+    error_log  /var/log/nginx/proton.edu.pl.error.log error;
+    disable_symlinks if_not_owner from=/home/proton/domains;
+
+    location / {
+        proxy_redirect off;
+	proxy_pass      http://79.137.56.144:8080;
+	proxy_cache 	proton;
+	proxy_cache_key "$host$request_uri $cookie_user";
+	proxy_cache_valid 15m;
+        proxy_cache_valid 404 1m;
+        proxy_no_cache $no_cache;
+        proxy_cache_bypass $no_cache;
+        proxy_cache_bypass $cookie_session $http_x_update;
+	add_header X-Proxy-Cache $upstream_cache_status;
+
+
+	location ~* ^.+\.(jpg|jpeg|gif|png|ico|svg|css|zip|tgz|gz|rar|bz2|doc|xls|exe|pdf|ppt|txt|odt|ods|odp|odf|tar|wav|bmp|rtf|js|mp3|avi|mpeg|flv|html|htm)$ {
+            proxy_cache	   off;
+	    root           /home/proton/domains/proton.edu.pl/public_html;
+            access_log     /var/log/nginx/proton.edu.pl.log combined;
+            access_log     /var/log/nginx/proton.edu.pl.bytes bytes;
+            expires        max;
+            try_files      $uri @fallback;
+        }
+    }
+
+    location @fallback {
+        proxy_pass      http://79.137.56.144:8080;
+    }
+
+    #location ~ /\.ht    {return 404;}
+    #location ~ /\.svn/  {return 404;}
+    #location ~ /\.git/  {return 404;}
+    #location ~ /\.hg/   {return 404;}
+    #location ~ /\.bzr/  {return 404;}
+
+}
+

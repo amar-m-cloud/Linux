@@ -1,0 +1,38 @@
+server {
+        server_name rockcat.proton.edu.pl www.rockcat.proton.edu.pl;
+        charset off;
+        index index.php index.html;
+        access_log /home/rockcat/logs/rockcat.access.log;
+        error_log /home/rockcat/logs/rockcat.error.log notice;
+        ssi on;
+        set $root_path /home/rockcat/domains/rockcat.proton.edu.pl/public_html;
+        root $root_path;
+        listen 79.137.56.144:80;
+	autoindex on;
+	
+     	location ~* ^.+\.(jpeg|jpg|png|gif|bmp|ico|svg|css|js)$ {
+            expires     max;
+        }
+
+
+     	location ~ [^/]\.php(/|$) {
+            
+	    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            if (!-f $document_root$fastcgi_script_name) {
+                return  404;
+            }
+	     
+            fastcgi_pass    127.0.0.1:9002;
+            fastcgi_index   index.php;
+            include         /usr/local/etc/nginx/fastcgi_params;
+	    try_files $uri =404;
+
+        }
+
+    }
+    
+
+
+
+
+
