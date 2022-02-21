@@ -1,0 +1,11 @@
+setsebool -P allow_execheap=off
+setsebool -P allow_execmem=off
+setsebool -P allow_execstack=off
+setsebool -P secure_mode_insmod=on
+setsebool -P ssh_sysadm_login=off
+
+allow_execheap (forbid processes to make their heap executable): off ;
+allow_execmem (forbid of processes to have both write and execute rights on memory pages): off ;
+allow_execstack (forbid processes to make their stack executable): off ;
+secure_mode_insmod (prohibits dynamic loading of modules by any process): on;
+ssh_sysadm_login (forbid SSH logins to connect directly in sysadmin role): off.
